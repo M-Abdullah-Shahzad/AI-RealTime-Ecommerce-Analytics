@@ -11,6 +11,8 @@ Features:
 - Micro-batch processing
 """
 
+import os
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
     col, from_json, schema_of_json, window, 
@@ -26,7 +28,7 @@ from datetime import datetime
 class SparkStreamingConsumer:
     """Consumes and processes Kafka streaming data with Spark"""
     
-    def __init__(self, kafka_bootstrap='localhost:9092', kafka_topic='retail_orders'):
+    def __init__(self, kafka_bootstrap=os.getenv('KAFKA_BROKER', 'localhost:9092'), kafka_topic='retail_orders'):
         self.kafka_bootstrap = kafka_bootstrap
         self.kafka_topic = kafka_topic
         self.spark = None
