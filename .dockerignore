@@ -1,57 +1,26 @@
+
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
+*.pyd
 .Python
 env/
 venv/
+.venv/
 ENV/
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
 
-# IDE
+# Git and IDE
+.git/
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 .DS_Store
 
-# Git
-.git
-.gitignore
-
-# Environment
+# Secrets
 .env
-.env.local
-
-# Documentation
-*.md
-README.md
-
-# Spark/Hadoop
-metastore_db/
-derby.log
-
-# Others
-.pytest_cache/
-*.log
-.coverage
-htmlcov/
+.env.*
 
 # Local datasets, generated outputs, and trained artifacts
 data/
@@ -62,4 +31,10 @@ logs/
 *.joblib
 *.pt
 *.png
-.venv/
+
+# Spark/Hadoop and test output
+metastore_db/
+derby.log
+.pytest_cache/
+.coverage
+htmlcov/
