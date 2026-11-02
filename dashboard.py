@@ -1,16 +1,16 @@
 """
 MODULE 10 - STREAMLIT DASHBOARD
 ================================
-Professional real-time analytics and business intelligence dashboard.
+Interactive dashboard for precomputed batch analytics and customer intelligence.
 
 Features:
-- Real-time sales monitoring
-- Customer churn predictions
+- Sales and customer analytics
+- Historical inactivity classification
 - RFM customer segments
 - Sales insights
 - Interactive filters and charts
 - Business metrics
-- AI-powered recommendations
+- Association-rule product recommendations
 """
 
 import streamlit as st
@@ -274,8 +274,8 @@ def display_geographical_analytics(df_filtered):
 
 
 def display_ai_insights(insights_df):
-    """Display AI-generated insights"""
-    st.markdown("## 💡 AI-Powered Insights")
+    """Display rule-based business insights"""
+    st.markdown("## 💡 Rule-based Business Insights")
     
     # Filter insights by category
     category = st.selectbox(
@@ -341,8 +341,8 @@ def display_recommendations(rules_df):
 
 def main():
     """Main dashboard application"""
-    st.title("🏪 E-Commerce AI Analytics Dashboard")
-    st.markdown("**Real-time Customer Analytics, Churn Prediction & AI Insights**")
+    st.title("🏪 E-commerce Analytics Dashboard")
+    st.markdown("**Batch Sales Analytics, Customer Segmentation & Inactivity Analysis**")
     
     # Load data
     df_clean, rfm_df, churn_df, insights_df, rules_df = load_data()

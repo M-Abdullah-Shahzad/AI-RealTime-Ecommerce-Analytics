@@ -1,7 +1,7 @@
 """
-MODULE 8 - AI BUSINESS INSIGHTS
+MODULE 8 - RULE-BASED BUSINESS INSIGHTS
 ================================
-Generates AI-powered business intelligence insights from analytics.
+Generates rule-based business insights from the calculated analytics.
 
 Automatically identifies:
 - Most valuable customers

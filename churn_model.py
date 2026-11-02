@@ -1,19 +1,14 @@
 """
-MODULE 7 - AI-BASED CHURN PREDICTION
-=====================================
-Machine learning model to predict customer churn.
+MODULE 7 - HISTORICAL CUSTOMER INACTIVITY CLASSIFICATION
+=========================================================
+Exploratory Random Forest classification of historical customer inactivity.
 
-Churn Definition:
-- No purchase in last 90 days = churned
-
-Features:
-- Recency, Frequency, Monetary
-- Average Order Value
-- Purchase Count
-- Total Spending
+Label: no purchase in the final 90 days of the observed dataset.
+This is retrospective classification, not a validated future churn forecast.
+Recency is deliberately excluded from model inputs because it directly defines the label.
 
 Model: Random Forest Classifier
-Framework: Scikit-learn + Spark MLlib
+Framework: Scikit-learn
 
 Metrics:
 - Accuracy, Precision, Recall, F1-Score
@@ -137,8 +132,9 @@ class ChurnPredictionModel:
         )
         
         print(f"\n✓ Features created for {len(features_df):,} customers")
-        print(f"\n📊 Features:")
-        features_list = ['Recency', 'Frequency', 'TotalMonetary', 'AvgOrderValue',
+        print("\nNote: Recency defines the historical inactivity label and is excluded to avoid direct target leakage.")
+        print(f"\n📊 Model input features:")
+        features_list = ['Frequency', 'TotalMonetary', 'AvgOrderValue',
                         'StdOrderValue', 'TotalQuantity', 'AvgItemsPerOrder', 'RepeatPurchaseRate']
         for i, feat in enumerate(features_list, 1):
             print(f"   {i}. {feat}")

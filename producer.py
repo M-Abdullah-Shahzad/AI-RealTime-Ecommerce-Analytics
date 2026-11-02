@@ -10,6 +10,10 @@ Simulates:
 - Producer-consumer architecture
 """
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 import pandas as pd
 import json
 from kafka import KafkaProducer
@@ -29,7 +33,7 @@ logger = logging.getLogger(__name__)
 class RetailKafkaProducer:
     """Produces retail transaction events to Kafka"""
     
-    def __init__(self, bootstrap_servers='localhost:9092', topic='retail_orders'):
+    def __init__(self, bootstrap_servers=bootstrap_servers, topic='retail_orders'):
         self.bootstrap_servers = bootstrap_servers
         self.topic = topic
         self.producer = None
@@ -186,17 +190,22 @@ class RetailKafkaProducer:
             print("✓ Kafka producer closed")
 
 
-def check_kafka_availability():
-    """Check if Kafka is running"""
+def check_kafka_availability(bootstrap_servers=None):
+    """Check the configured Kafka broker before starting the producer."""
+    bootstrap_servers = bootstrap_servers or os.getenv('KAFKA_BROKER', 'localhost:9092')
     print("\n" + "="*80)
     print("🔍 CHECKING KAFKA AVAILABILITY")
     print("="*80)
     
     try:
         from socket import create_connection
-        sock = create_connection(('localhost', 9092), timeout=2)
+        from urllib.parse import urlsplit
+        parsed = urlsplit(f'//{bootstrap_servers}')
+        host = parsed.hostname or 'localhost'
+        port = parsed.port or 9092
+        sock = create_connection((host, port), timeout=2)
         sock.close()
-        print("✓ Kafka broker is available at localhost:9092")
+        print(f"✓ Kafka broker is available at {bootstrap_servers}")
         return True
     except Exception as e:
         print(f"❌ Kafka broker not available: {e}")
@@ -214,14 +223,15 @@ def main():
     print("🚀 MODULE 4: APACHE KAFKA STREAMING - PRODUCER")
     print("="*80)
     
-    # Check Kafka availability
-    if not check_kafka_availability():
+    # Respect the broker address supplied by Docker Compose or the local environment.
+    bootstrap_servers = os.getenv('KAFKA_BROKER', 'localhost:9092')
+    if not check_kafka_availability(bootstrap_servers):
         print("\n⚠️  Please start Kafka before running the producer")
         return
     
     # Initialize producer
     producer = RetailKafkaProducer(
-        bootstrap_servers='localhost:9092',
+        bootstrap_servers=bootstrap_servers,
         topic='retail_orders'
     )
     
