@@ -10,7 +10,7 @@ Features:
 - Sales insights
 - Interactive filters and charts
 - Business metrics
-- AI-powered recommendations
+- Association-rule product recommendations
 """
 
 import streamlit as st
@@ -341,7 +341,7 @@ def display_recommendations(rules_df):
 
 def main():
     """Main dashboard application"""
-    st.title("🏪 E-Commerce AI Analytics Dashboard")
+    st.title("🏪 E-commerce Analytics Dashboard")
     st.markdown("**Batch Sales Analytics, Customer Segmentation & Inactivity Analysis**")
     
     # Load data
