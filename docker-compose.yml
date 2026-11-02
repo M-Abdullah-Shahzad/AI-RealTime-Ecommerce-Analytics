@@ -60,6 +60,7 @@ services:
       - "8080:8080"  # Spark UI
     environment:
       KAFKA_BROKER: kafka:29092
+      RETAIL_DATASET_PATH: /app/data/online_retail_II.csv
       SPARK_MASTER: local[*]
       PYTHONUNBUFFERED: 1
     volumes:
