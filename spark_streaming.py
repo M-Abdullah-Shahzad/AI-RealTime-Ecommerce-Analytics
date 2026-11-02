@@ -12,6 +12,9 @@ Features:
 """
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
@@ -352,7 +355,7 @@ class SparkStreamingConsumer:
 def main():
     """Main execution"""
     consumer = SparkStreamingConsumer(
-        kafka_bootstrap='localhost:9092',
+        kafka_bootstrap=os.getenv('KAFKA_BROKER', 'localhost:9092'),
         kafka_topic='retail_orders'
     )
     
