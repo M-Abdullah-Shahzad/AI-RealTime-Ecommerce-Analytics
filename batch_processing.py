@@ -16,6 +16,7 @@ Tasks:
 - Save cleaned dataset
 """
 
+import os
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -145,6 +146,8 @@ class DataProcessor:
     def save_cleaned_data(self, output_path):
         """Save cleaned dataset to CSV"""
         print(f"\n💾 Saving cleaned data to {output_path}...")
+        from pathlib import Path
+        Path(output_path).parent.mkdir(parents=True, exist_ok=True)
         self.df_cleaned.to_csv(output_path, index=False)
         print(f"✓ Cleaned data saved successfully!")
         return output_path
@@ -161,7 +164,7 @@ def main():
     print("="*80)
     
     # Initialize processor
-    input_path = 'online_retail_II.csv'
+    input_path = os.getenv('RETAIL_DATASET_PATH', 'data/online_retail_II.csv')
     output_path = 'outputs/online_retail_cleaned.csv'
     
     processor = DataProcessor(input_path)
