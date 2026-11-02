@@ -11,6 +11,9 @@ Simulates:
 """
 
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 import pandas as pd
 import json
 from kafka import KafkaProducer
@@ -228,7 +231,7 @@ def main():
     
     # Initialize producer
     producer = RetailKafkaProducer(
-        bootstrap_servers='localhost:9092',
+        bootstrap_servers=bootstrap_servers,
         topic='retail_orders'
     )
     
